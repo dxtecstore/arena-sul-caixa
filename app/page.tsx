@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import Dashboard from "./Dashboard";
 import LoginForm from "./LoginForm";
 
-const SESSION_VALUE = "arena-atual-2026-07-20-revoked-old-access";
+const SESSION_VALUE = "arena-atual-session-rev3-2026-07-20";
 
 export const dynamic = "force-dynamic";
 

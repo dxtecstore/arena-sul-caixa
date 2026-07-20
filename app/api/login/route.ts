@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 
-const SESSION_VALUE = "arena-atual-2026-07-20-revoked-old-access";
+const SESSION_VALUE = "arena-atual-session-rev3-2026-07-20";
 
 export async function POST(request: Request) {
   const { user, password } = await request.json();
 
-  if (user !== "ARENAATUAL2026" || password !== "ArenaAtual@2026!") {
+  if (user.trim().toLowerCase() !== "admin" || password !== "123456atualatual") {
     return NextResponse.json({ ok: false }, { status: 401 });
   }
 
