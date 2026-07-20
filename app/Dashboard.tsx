@@ -7,13 +7,13 @@ const initial:Product[]=[
 {id:"coca2",name:"Coca-Cola",detail:"Garrafa PET 2L",price:12,stock:36,pack:"6 pacotes × 6",color:"#e82924",emoji:"🥤",image:"/products/coca-cola-2l.jpg"},
 {id:"fanta2",name:"Fanta Laranja",detail:"Garrafa PET 2L",price:10,stock:18,pack:"3 pacotes × 6",color:"#f58220",emoji:"🍊",image:"/products/fanta-laranja-2l.png"},
 {id:"cocalata",name:"Coca-Cola",detail:"Lata 350ml",price:5,stock:24,pack:"4 pacotes × 6",color:"#b91c1c",emoji:"🥤",image:"/products/coca-cola-lata.jpg"},
-{id:"skilho",name:"Skol Pilsen",detail:"Lata 350ml",price:5,stock:25,pack:"5 pacotes × 5",color:"#f2b705",emoji:"🍺",image:"/products/skol-lata.jpg"}];
+{id:"skilho",name:"Skilhos Hiléia",detail:"Salgadinho sabor carne seca",price:5,stock:25,pack:"5 pacotes × 5",color:"#7aaf36",emoji:"🍿",image:"/products/skilhos-carne-seca.png"}];
 const money=(n:number)=>n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 const today=new Date().toISOString().slice(0,10);
 export default function Home(){
  const[tab,setTab]=useState("caixa"),[products,setProducts]=useState(initial),[cart,setCart]=useState<Record<string,number>>({}),[sales,setSales]=useState<Sale[]>([]),[bookings,setBookings]=useState<Booking[]>([]),[payment,setPayment]=useState("Pix"),[received,setReceived]=useState(""),[checkout,setCheckout]=useState(false),[toast,setToast]=useState("");
  const[form,setForm]=useState({date:today,time:"18:00",customer:"",phone:"",note:""});
- useEffect(()=>{try{const d=JSON.parse(localStorage.getItem("arena-caixa-v1")||"null");if(d){setProducts((d.products||initial).map((p:Product,i:number)=>({...initial[i],...p,image:p.image||initial[i]?.image||""})));setSales(d.sales||[]);setBookings(d.bookings||[])}}catch{}},[]);
+ useEffect(()=>{try{const d=JSON.parse(localStorage.getItem("arena-caixa-v1")||"null");if(d){setProducts((d.products||initial).map((p:Product,i:number)=>p.id==="skilho"&&["Skol Pilsen","Skilho"].includes(p.name)?{...p,...initial[3]}:{...initial[i],...p,image:p.image||initial[i]?.image||""}));setSales(d.sales||[]);setBookings(d.bookings||[])}}catch{}},[]);
  useEffect(()=>localStorage.setItem("arena-caixa-v1",JSON.stringify({products,sales,bookings})),[products,sales,bookings]);
  const count=Object.values(cart).reduce((a,b)=>a+b,0),total=useMemo(()=>products.reduce((s,p)=>s+(cart[p.id]||0)*p.price,0),[cart,products]);
  const todaySales=sales.filter(s=>s.time.startsWith(new Date().toLocaleDateString("pt-BR"))),dayTotal=todaySales.reduce((s,x)=>s+x.total,0),change=Math.max(0,+received.replace(",",".")-total);
