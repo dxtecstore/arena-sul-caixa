@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Arena | Caixa & Agenda",
+  title: "Arena Atual | Caixa & Agenda",
   description: "Sistema de caixa, estoque e horários da Arena.",
   icons: {
     icon: "/favicon.svg",
