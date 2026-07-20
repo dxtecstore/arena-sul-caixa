@@ -7,7 +7,7 @@ export default function LoginForm({ onLogin }: { onLogin: () => void }) {
   const [error, setError] = useState("");
   function login(e: React.FormEvent) {
     e.preventDefault();
-    if (user.trim().toLowerCase() === "admin" && password.trim() === "1234") {
+    if (user.trim().toLowerCase() === "admin" && password.trim() === "123456atualatual") {
       localStorage.setItem("arena_session", "active"); onLogin(); return;
     }
     setError("Usuário ou senha incorretos.");
