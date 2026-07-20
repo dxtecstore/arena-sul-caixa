@@ -7,8 +7,8 @@ export default function LoginForm({ onLogin }: { onLogin: () => void }) {
   const [error, setError] = useState("");
   function login(e: React.FormEvent) {
     e.preventDefault();
-    if (user.trim().toLowerCase() === "admin" && password.trim() === "123456atualatual") {
-      localStorage.setItem("arena_session", "active"); onLogin(); return;
+    if (user.trim().toLowerCase() === "admin" && password.trim() === "ArenaAtual@2026!") {
+      localStorage.setItem("arena_session", "arena-atual-2026-07-20-blocked-old-access"); onLogin(); return;
     }
     setError("Usuário ou senha incorretos.");
   }
