@@ -1,6 +1,12 @@
-import { cookies } from "next/headers";
+"use client";
+import { useEffect, useState } from "react";
 import Dashboard from "./Dashboard";
 import LoginForm from "./LoginForm";
-const SESSION_VALUE = "arena-sul-7e4c8d21b9534f06a812";
-export const dynamic = "force-dynamic";
-export default async function Home(){const session=(await cookies()).get("arena_session")?.value;return session===SESSION_VALUE?<Dashboard/>:<LoginForm/>}
+
+export default function Home() {
+  const [ready, setReady] = useState(false);
+  const [logged, setLogged] = useState(false);
+  useEffect(() => { setLogged(localStorage.getItem("arena_session") === "active"); setReady(true); }, []);
+  if (!ready) return null;
+  return logged ? <Dashboard /> : <LoginForm onLogin={() => setLogged(true)} />;
+}

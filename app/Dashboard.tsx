@@ -11,6 +11,7 @@ const initial:Product[]=[
 const money=(n:number)=>n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 const today=new Date().toISOString().slice(0,10);
 export default function Home(){
+useEffect(()=>{const link=document.querySelector<HTMLAnchorElement>("a.logout");const leave=(event:Event)=>{event.preventDefault();localStorage.removeItem("arena_session");location.reload()};link?.addEventListener("click",leave);return()=>link?.removeEventListener("click",leave)},[]);
  const[tab,setTab]=useState("caixa"),[products,setProducts]=useState(initial),[cart,setCart]=useState<Record<string,number>>({}),[sales,setSales]=useState<Sale[]>([]),[bookings,setBookings]=useState<Booking[]>([]),[payment,setPayment]=useState("Pix"),[received,setReceived]=useState(""),[checkout,setCheckout]=useState(false),[toast,setToast]=useState("");
  const[form,setForm]=useState({date:today,time:"18:00",customer:"",phone:"",note:""});
  useEffect(()=>{try{const d=JSON.parse(localStorage.getItem("arena-caixa-v1")||"null");if(d){setProducts((d.products||initial).map((p:Product,i:number)=>p.id==="skilho"&&["Skol Pilsen","Skilho"].includes(p.name)?{...p,...initial[3]}:{...initial[i],...p,image:p.image||initial[i]?.image||""}));setSales(d.sales||[]);setBookings(d.bookings||[])}}catch{}},[]);
