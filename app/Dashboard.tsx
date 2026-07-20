@@ -91,7 +91,7 @@ export default function Dashboard(){
   function reserveSlot(slot:ScheduleSlot){const name=prompt("Nome do cliente ou grupo:");if(!name?.trim())return;setSchedule(s=>s.map(x=>x.id===slot.id?{...x,customer:name.trim(),checkedIn:false}:x));notify(`${slot.day}, ${slot.time} reservado`)}
   function clearSlot(slot:ScheduleSlot){if(confirm(`Liberar ${slot.day} às ${slot.time}?`))setSchedule(s=>s.map(x=>x.id===slot.id?{...x,customer:"",checkedIn:false,note:""}:x))}
   function toggleCheckIn(slot:ScheduleSlot){setSchedule(s=>s.map(x=>x.id===slot.id?{...x,checkedIn:!x.checkedIn}:x));notify(slot.checkedIn?"Check-in desfeito":"Check-in confirmado")}
-  function logout(){localStorage.removeItem("arena_session");location.reload()}
+  function logout(){location.href="/api/logout"}
 
   return <main>
     <header className="topbar"><div className="brand"><span>A</span><div><b>ARENA ATUAL</b><small>Caixa & Agenda</small></div></div><div className="headeractions"><div className="open"><i/> Caixa aberto</div><button className="logout" onClick={logout}>Sair</button></div></header>
